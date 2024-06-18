@@ -8,8 +8,8 @@ body {
 .cart-item {
     width: 70%; /* Đặt chiều rộng của mục giỏ hàng là 70% */
     margin: 0 auto; 
-    padding: 20px;
-    border: 1px solid #ddd;
+    /* padding: 20px; */
+    /* border: 1px solid #ddd; */
     /* border-radius: 10px; Bo góc giỏ hàng */
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
@@ -111,7 +111,6 @@ body {
     text-align: center;
     text-decoration: none;
     border-radius: 5px;
-
     margin: 20px auto 0 auto; /* Căn giữa nút thanh toán với khoảng cách phía trên là 20px */
 }
 .sanpham-button:hover {

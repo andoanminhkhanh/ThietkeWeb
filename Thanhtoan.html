@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 100px; /* Khoảng cách với đường link truy cập */
+        }
+        .form-container {
+            width: 80%;
+            max-width: 1200px;
+            padding: 40px;
+            border: 2px solid #aad6f3;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            position: relative; /* Đảm bảo nút đóng được định vị chính xác */
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .close-button:hover {
+            background-color: #e60000;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 120px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #aad6f3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #aad6f3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <button class="close-button" onclick="goBack()">X</button>
+        <h2>Thông tin giao hàng</h2>
+        <form action="/submit-payment" method="POST">
+            <div class="form-group">
+                <label for="ho-ten">Họ tên*:</label>
+                <input type="text" id="ho-ten" name="ho-ten" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Điện thoại*:</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="VD: 0949999999" required>
+            </div>
+            <div class="form-group">
+                <label for="province">Tỉnh/Thành phố*:</label>
+                <select id="province" name="province" required onchange="updateDistricts()">
+                    <option value="">Chọn tỉnh/thành phố</option>
+                    <option value="Hanoi">Hà Nội</option>
+                    <option value="HoChiMinh">TP. Hồ Chí Minh</option>
+                    <option value="NinhBinh">Ninh Bình</option>
+                    <option value="NamDinh">Nam Định</option>
+                    <option value="HaNam">Hà Nam</option>
+                    <option value="DaNang">Đà Nẵng</option>
+                    <option value="Hue">Huế</option>
+                    <!-- Thêm các tỉnh/thành phố khác ở đây -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="district">Quận/Huyện*:</label>
+                <select id="district" name="district" required>
+                    <option value="">Chọn quận/huyện</option>
+                    <option value="QuanThanhXuan">Quận Thanh Xuân</option>
+                    <option value="QuanDongDa">Quận Đống Đa</option>
+                    <!-- Các quận/huyện sẽ được cập nhật bằng JavaScript -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ward">Phường/Xã*:</label>
+                <select id="ward" name="ward" required>
+                    <option value="">Chọn phường/xã</option>
+                    <!-- Các phường/xã sẽ được cập nhật bằng JavaScript -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="address">Địa chỉ chi tiết*:</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Lời nhắn:</label>
+                <textarea id="message" name="message"></textarea>
+            </div>
+            <button type="submit">Thanh toán</button>
+        </form>
+    </div>
+
+    <script>
+        const districts = {
+            Hanoi: ["Hoàn Kiếm", "Ba Đình", "Hai Bà Trưng"],
+            HoChiMinh: ["Quận 1", "Quận 2", "Quận 3"]
+            // Thêm các tỉnh/thành phố và quận/huyện tương ứng ở đây
+        };
+
+        function updateDistricts() {
+            const provinceSelect = document.getElementById("province");
+            const districtSelect = document.getElementById("district");
+            const selectedProvince = provinceSelect.value;
+
+            // Xóa các quận/huyện hiện có
+            districtSelect.innerHTML = '<option value="">Chọn quận/huyện</option>';
+
+            if (districts[selectedProvince]) {
+                districts[selectedProvince].forEach(district => {
+                    const option = document.createElement("option");
+                    option.value = district;
+                    option.textContent = district;
+                    districtSelect.appendChild(option);
+                });
+            }
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
