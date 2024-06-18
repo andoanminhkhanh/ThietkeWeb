@@ -1,0 +1,153 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0; /* Khoảng cách mặc định bên ngoài của body */
+    padding: 40px; /* Khoảng cách bên trong của body*/
+    background-color: #ffffff;
+}
+/* Giỏ hàng có hàng */
+.cart-item {
+    width: 70%; /* Đặt chiều rộng của mục giỏ hàng là 70% */
+    margin: 0 auto; 
+    padding: 20px;
+    border: 1px solid #ddd;
+    /* border-radius: 10px; Bo góc giỏ hàng */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.cart-header {
+    font-size: 24px;
+    margin-bottom: 0px;
+    text-align: center;
+}
+.product-buy {
+    display: flex;
+    justify-content: space-between; /* Căn đều các phần tử bên trong phần sản phẩm, với khoảng cách giữa chúng */
+    padding: 10px;
+    border-bottom: 1px solid #eee; /* Đặt viền dưới của phần sản phẩm là 1px với màu xám nhạt */
+}
+.product:last-child {
+    border-bottom: none;
+}
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center; /*Căn giữa các phần tử theo chiều dọc */
+}
+.product-name {
+    font-weight: bold;
+}
+.product-price {
+    color: #007bff;
+    margin-right: 80px; /* Thêm khoảng cách 80px từ size */
+    text-align: right;
+    flex: 1;
+}
+.product-size {
+    align-items: center;
+    margin-right: 20px;
+    flex: 0 0 50px; /* Đặt kích thước cố định cho phần tử này */
+}
+.product-quantity {
+    display: flex;
+    align-items: center;
+    /* margin-right: 2cm; Thêm khoảng cách 1cm từ đơn giá */
+    flex: 0 0 auto;
+}
+.product-quantity span {
+    margin-right: 10px; /* Thêm khoảng cách bên phải của span */
+    white-space: nowrap;
+}
+.product-quantity input {
+    width: 40px;
+    padding: 5px;
+    margin-left: 10px;
+    margin-left: 2cm;
+}
+.total {
+    font-size: 18px;
+    text-align: right;
+    margin-top: 20px;
+}
+.thanhtoan-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #b3d5f2;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.thanhtoan-button:hover {
+    background-color: #5f97c9;
+}
+/* Giỏ hàng trống */
+.center-heading {
+    text-align: center;
+}
+.cart {
+    width: 70%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.cart-empty {
+    text-align: left;
+    padding: 20px;
+}
+.cart-empty p {
+    font-size: 18px;
+    margin: 10px 0;
+    text-align: center;
+}
+.sanpham-button {
+    display: block;
+    width: 50%;
+    padding: 10px;
+    background-color: #b3d5f2;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+
+    margin: 20px auto 0 auto; /* Căn giữa nút thanh toán với khoảng cách phía trên là 20px */
+}
+.sanpham-button:hover {
+    background-color: #5f97c9;
+}
+.sanpham {
+    margin-top: 40px;
+}
+.sanpham h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.product-list {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.product-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    flex: 1;
+}
+.product-item img {
+    max-width: 100%;
+    height: auto;
+}
+.product-item p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+.product-item button {
+    background-color: #aad6f3;
+    color: black;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
