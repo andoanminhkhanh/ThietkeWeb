@@ -6,166 +6,307 @@
     <title>Thanh toán</title>
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            padding: 100px; /* Khoảng cách với đường link truy cập */
         }
-        .form-container {
-            width: 80%;
-            max-width: 1200px;
-            padding: 40px;
-            border: 2px solid #aad6f3;
-            border-radius: 10px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            overflow-y: auto;
-            position: relative; /* Đảm bảo nút đóng được định vị chính xác */
-        }
-        .close-button {
+        .thanhtoan {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: #ff4d4d;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
+            top: 50px; /* Cách lề trên 50px */
+            right: 130px; /* Cách lề phải 150px */
+            font-size: 22px; /* Kích thước chữ */
+        }
+        .container {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            font-weight: bold;
+            justify-content: space-between;
+            margin: 40px 20px 0px 150px;
         }
-        .close-button:hover {
-            background-color: #e60000;
+        .order-summary {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 40px 100px 20px 20px;
+            width: 35%;
         }
-        h2 {
+        .shipping-info {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 40px 20px 20px 100px;
+            width: 40%;
+        }
+        .shipping-info h2, .order-summary h2 {
             text-align: center;
-            margin-bottom: 20px;
         }
-        .form-group {
-            margin-bottom: 20px;
+        .shipping-info form div, .order-summary div {
+            margin-bottom: 15px;
         }
-        label {
+        .shipping-info label {
             display: block;
             margin-bottom: 5px;
-            font-weight: bold;
         }
-        input, select, textarea {
+        .shipping-info input, .shipping-info select, .shipping-info textarea {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 8px;
             box-sizing: border-box;
         }
-        textarea {
-            height: 120px;
+        .order-summary img {
+            width: 100px;
+            height: 100px;
         }
-        button {
+        .order-summary .product {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 15px;
+        }
+        .order-summary table {
             width: 100%;
-            padding: 10px;
-            background-color: #aad6f3;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
+            border-collapse: collapse;
+        }
+        .order-summary table td {
+            padding: 5px 0;
+        }
+        .order-summary .total {
+            color: red;
+            font-weight: bold;
+        }
+        .buttons {
+            text-align: center;
             margin-top: 20px;
         }
-        button:hover {
-            background-color: #aad6f3;
+        .buttons a, .buttons button {
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid #000;
+            background-color: #b3d5f2; /* Nền màu xanh */
+            color: #000; /* Chữ màu đen */
+            cursor: pointer;
+            margin: 5px;
+        }
+        .buttons a:hover, .buttons button:hover {
+            background-color: #5f97c9; /* Màu xanh đậm hơn khi hover */
+        }
+        /* Popup container */
+        .popup {
+            display: none; /* Ẩn popup mặc định */
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4); /* Màu nền tối */
+            padding-top: 60px;
+        }
+
+        /* Popup content */
+        .popup-content {
+            background-color: #fde6ef;
+            margin: 5% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%; 
+            text-align: center;
+        }
+
+        /* Close button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .popup img {
+            width:30%;
+            height: auto;
         }
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <button class="close-button" onclick="goBack()">X</button>
-        <h2>Thông tin giao hàng</h2>
-        <form action="/submit-payment" method="POST">
-            <div class="form-group">
-                <label for="ho-ten">Họ tên*:</label>
-                <input type="text" id="ho-ten" name="ho-ten" required>
+<div class="thanhtoan">Thanh toán</div>
+<div class="container">
+    <div class="shipping-info">
+        <h2>THÔNG TIN GIAO HÀNG</h2>
+        <form action="">
+            <div>
+                <label for="hoten">Họ tên *</label>
+                <input type="text" id="hoten" name="hoten" required>
             </div>
-            <div class="form-group">
-                <label for="phone">Điện thoại*:</label>
-                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="VD: 0949999999" required>
+            <div>
+                <label for="phone">Điện thoại *</label>
+                <input type="tel" id="phone" name="phone" placeholder="VD: 0949999999" required>
             </div>
-            <div class="form-group">
-                <label for="province">Tỉnh/Thành phố*:</label>
-                <select id="province" name="province" required onchange="updateDistricts()">
+            <div>
+                <label for="tp">Tỉnh/Thành phố *</label>
+                <select id="tp" name="tp" required onchange="updateQuan()"">
                     <option value="">Chọn tỉnh/thành phố</option>
                     <option value="Hanoi">Hà Nội</option>
                     <option value="HoChiMinh">TP. Hồ Chí Minh</option>
                     <option value="NinhBinh">Ninh Bình</option>
-                    <option value="NamDinh">Nam Định</option>
-                    <option value="HaNam">Hà Nam</option>
-                    <option value="DaNang">Đà Nẵng</option>
-                    <option value="Hue">Huế</option>
-                    <!-- Thêm các tỉnh/thành phố khác ở đây -->
                 </select>
             </div>
-            <div class="form-group">
-                <label for="district">Quận/Huyện*:</label>
-                <select id="district" name="district" required>
+            <div>
+                <label for="quan">Quận/Huyện *</label>
+                <select id="quan" name="quan" required>
                     <option value="">Chọn quận/huyện</option>
-                    <option value="QuanThanhXuan">Quận Thanh Xuân</option>
-                    <option value="QuanDongDa">Quận Đống Đa</option>
-                    <!-- Các quận/huyện sẽ được cập nhật bằng JavaScript -->
                 </select>
             </div>
-            <div class="form-group">
-                <label for="ward">Phường/Xã*:</label>
-                <select id="ward" name="ward" required>
-                    <option value="">Chọn phường/xã</option>
-                    <!-- Các phường/xã sẽ được cập nhật bằng JavaScript -->
+            <div>
+                <label for="phuong">Phường/Xã *</label>
+                <input type="text" id="phuong" name="phuong" required>
                 </select>
             </div>
-            <div class="form-group">
-                <label for="address">Địa chỉ chi tiết*:</label>
-                <input type="text" id="address" name="address" required>
+            <div>
+                <label for="diachi">Địa chỉ chi tiết *</label>
+                <input type="text" id="diachi" name="diachi" required>
             </div>
-            <div class="form-group">
-                <label for="message">Lời nhắn:</label>
-                <textarea id="message" name="message"></textarea>
+            <div>
+                <label for="note">Lời nhắn</label>
+                <textarea id="note" name="note"></textarea>
             </div>
-            <button type="submit">Thanh toán</button>
+            <script>
+                const quan = {
+                Hanoi: ["Hoàn Kiếm", "Ba Đình", "Hai Bà Trưng"],
+                HoChiMinh: ["Quận 1", "Quận 2", "Quận 3"],
+                NinhBinh: ["Yên Khánh", "Hoa Lư", "Yên Mô"]
+            };
+    
+            function updateQuan() {
+                const tpSelect = document.getElementById("tp");
+                const quanSelect = document.getElementById("quan");
+                const selectedTp = tpSelect.value;
+    
+                // Xóa các quận/huyện hiện có
+                quanSelect.innerHTML = '<option value="">Chọn quận/huyện</option>';
+    
+                if (quan[selectedTp]) {
+                    quan[selectedTp].forEach(quan => {
+                        const option = document.createElement("option");
+                        option.value = quan;
+                        option.textContent = quan;
+                        quanSelect.appendChild(option);
+                    });
+                }
+            }
+    
+            function goBack() {
+                window.history.back();
+            }
+            </script>
         </form>
     </div>
 
-    <script>
-        const districts = {
-            Hanoi: ["Hoàn Kiếm", "Ba Đình", "Hai Bà Trưng"],
-            HoChiMinh: ["Quận 1", "Quận 2", "Quận 3"]
-            // Thêm các tỉnh/thành phố và quận/huyện tương ứng ở đây
-        };
+    <div class="order-summary">
+        <h2>ĐƠN HÀNG (2 sản phẩm)</h2>
+        <div class="product">
+            <img src="D:\Anh\Penelope Top.png" alt="Penelope Top">
+            <p>Penelope Top</p>
+            <p>520.000 VND</p>
+        </div>
+        <div class="product">
+            <img src="D:\Anh\Gina Top.webp" alt="Gina Top">
+            <p>Gina Top</p>
+            <p>558.000 VND</p>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <td>Tạm tính:</td>
+                    <td>1.187.000 VND</td>
+                </tr>
+                <tr>
+                    <td>Chiết khấu:</td>
+                    <td>0 VND</td>
+                </tr>
+                <tr>
+                    <td>Mã giảm giá:</td>
+                    <td>0 VND</td>
+                </tr>
+                <tr>
+                    <td>Phí vận chuyển:</td>
+                    <td>22.000 VND</td>
+                </tr>
+                <tr>
+                    <td class="total">Tổng số tiền thanh toán:</td>
+                    <td class="total">1.209.000 VND</td>
+                </tr>
+            </table>
+        </div>
+        <div class="buttons">
+            <button type="button" onclick="openPopup()">Thanh toán ></button>
+            <a href="sanpham.html">Tiếp tục mua hàng</a>
+            <button type="button" onclick="openSuccessPopup()">Thanh toán khi nhận hàng</button>
+        </div>
+    </div>
+</div>
+<!-- Popup -->
+<div id="popup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h2>Thông tin chuyển khoản</h2>
+        <img src="D:\Anh\stk.jpg" alt="Thông tin tài khoản">
+        <p>Số tài khoản: 0593 1290 001</p>
+        <p>Ngân hàng: TPBank</p>
+        <p>Chủ tài khoản: An Đoàn Minh Khánh</p>
+    </div>
+</div>
 
-        function updateDistricts() {
-            const provinceSelect = document.getElementById("province");
-            const districtSelect = document.getElementById("district");
-            const selectedProvince = provinceSelect.value;
+<script>
+    // Mở popup
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
 
-            // Xóa các quận/huyện hiện có
-            districtSelect.innerHTML = '<option value="">Chọn quận/huyện</option>';
+    // Đóng popup
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+</script>
+<!-- Success Popup -->
+<div id="successPopup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h2>Đặt hàng thành công!</h2>
+        <p>Cảm ơn bạn đã đặt hàng. Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.</p>
+    </div>
+</div>
 
-            if (districts[selectedProvince]) {
-                districts[selectedProvince].forEach(district => {
-                    const option = document.createElement("option");
-                    option.value = district;
-                    option.textContent = district;
-                    districtSelect.appendChild(option);
-                });
-            }
+<script>
+    // Mở popup
+    function openPopup() {
+        document.getElementById("popup").style.display = "block";
+    }
+
+    // Đóng popup
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Mở success popup khi double click ra ngoài popup hiện tại
+    window.ondblclick = function(event) {
+        const popup = document.getElementById("popup");
+        if (popup.style.display === "block") {
+            closePopup();
+            document.getElementById("successPopup").style.display = "block";
         }
+    }
 
-        function goBack() {
-            window.history.back();
-        }
-    </script>
+    // Đóng success popup
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+        document.getElementById("successPopup").style.display = "none";
+    }
+    // Mở success popup khi click vào button "Thanh toán khi nhận hàng"
+    function openSuccessPopup() {
+        document.getElementById("successPopup").style.display = "block";
+    }
+</script>
 </body>
 </html>

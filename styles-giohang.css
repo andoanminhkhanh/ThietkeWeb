@@ -4,15 +4,32 @@ body {
     padding: 40px; /* Khoảng cách bên trong của body*/
     background-color: #ffffff;
 }
+.trangchu {
+    margin: 20px 20px 20px 150px;
+    font-size: 13px;
+}
+.trangchu a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 13px;
+}
+.cart-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+}
+
 /* Giỏ hàng có hàng */
-.cart-item {
+/* .cart-item {
     width: 70%; /* Đặt chiều rộng của mục giỏ hàng là 70% */
-    margin: 0 auto; 
+    /* margin: 0 auto;  */
     /* padding: 20px; */
     /* border: 1px solid #ddd; */
     /* border-radius: 10px; Bo góc giỏ hàng */
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+    /* box-shadow: 0 0 10px rgba(0,0,0,0.1);
+} */
 .cart-header {
     font-size: 24px;
     margin-bottom: 0px;

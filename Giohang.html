@@ -1,48 +1,307 @@
-<!DOCTYPE html><html lang="vi-VN">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Giỏ hàng</title>
-        <link rel="stylesheet" href="styles-giohang.css">
-        <style>
-
-        </style>
-    </head>
-    <body>
+<!DOCTYPE html>
+<html lang="vi-VN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .trangchu {
+            margin: 20px 20px 20px 150px;
+            font-size: 13px;
+        }
+        .trangchu a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        .trangchu:hover {
+            color: #000000;
+        }
+        .center-heading {
+            text-align: center;
+        }
+        .giohang {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .gio-hang-trong {
+            text-align: left;
+            padding: 20px;
+        }
+        .gio-hang-trong p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .gio-hang-trong button {
+            background-color: #aad6f3;
+            color: black;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .sanpham {
+            margin-top: 40px;
+        }
+        .sanpham h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .product-list {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .product-item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+            flex: 1;
+        }
+        .product-item img {
+            max-width: 100%;
+            height: auto;
+        }
+        .product-item p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .product-item button {
+            background-color: #aad6f3;
+            color: black;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+        /* Giỏ hàng có hàng */
+        .giohangcohang {
+            width: 80%;
+            background-color: #fff;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .cart-header {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .sp-da-mua {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .product:last-child {
+            border-bottom: none;
+        }
+        .product-info {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .product-name {
+            font-weight: bold;
+        }
+        .product-price {
+            color: #007bff;
+            margin-right: 80px; /* Thêm khoảng cách 80px từ size */
+            text-align: right;
+            flex: 1;
+            padding: px;
+        }
+        .product-size {
+            align-items: center;
+            margin-right: 20px;
+            flex: 0 0 50px; /* Đặt kích thước cố định cho phần tử này */
+        }
+        .product-quantity {            
+            display: flex;
+            align-items: center;
+            margin-right: 2cm; /*Thêm khoảng cách 1cm từ đơn giá */
+            flex: 0 0 auto;
+        }
+        .product-quantity input {
+            width: 40px;
+            padding: 5px;
+            margin-left: 10px;
+            margin-left: 2cm;
+        }
+        .total {
+            font-size: 20px;
+            text-align: right;
+            margin-top: 20px;
+        }
+        .thanhtoan-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #b3d5f2;
+            color: black;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .thanhtoan-button:hover {
+            background-color: #5f97c9;
+        }
+        .buy-button {
+            display: block;
+            width: 15%;
+            padding: 10px;
+            background-color: #b3d5f2;
+            color: black;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .buy-button:hover {
+            background-color: #5f97c9;
+        }
+        .product-item img {
+            width: 300px;
+            height: 350px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="trangchu">
+        <a href="trangchu">Trang chủ</a> &gt; <a href="giohang">Giỏ hàng</a>
+    </div>
+    <div class="giohang">
         <!-- Giỏ hàng có sản phẩm -->
-        <div class="cart-item">
-            <div class="Giỏ hàng của bạn"></div>
-            <div class="product-buy">
+        <div class="gio-hang-trong">
+            <div class="cart-header">Giỏ hàng của bạn</div>
+            <div class="sp-da-mua">
+    
                 <div class="product-info">
-                    <div class="product-name">Fuzzy Coat</div>
-                    <div class="product-price">1.189.000 VND</div>
-                    <div class="product-size">S</div>
+                    <div class="product-name">Penelope Top</div>
+                    <div class="product-price">520.000 VND</div>
+                    <div class="product-quantity">S</div>
                 </div>
                 <div class="product-quantity">
                     <span>Số lượng:</span>
                     <input type="number" value="1" min="1">
                 </div>
             </div>
-            <div class="product-buy">
+            <div class="sp-da-mua">
                 <div class="product-info">
-                    <div class="product-name">Chelsea Coat</div>
-                    <div class="product-price">1.189.000 VND</div>
-                    <div class="product-size">S</div>
+                    <div class="product-name">Gina Top</div>
+                    <div class="product-price">558.000 VND</div>
+                    <div class="product-quantity">S</div>
                 </div>
                 <div class="product-quantity">
                     <span>Số lượng:</span>
                     <input type="number" value="1" min="1">
                 </div>
             </div>
-            <div class="total">Tổng tiền: 2.378.000 VND</div>
+            <div class="total">Tổng tiền: 1.187.000 VND</div>
             <a href="Thanhtoan.html" class="thanhtoan-button">Thanh toán</a>
-            <!-- Giỏ hàng trống -->
-            <div class="cart-empty">
-                <p>Chưa có sản phẩm nào trong giỏ hàng của bạn</p>
-                <a href="sanpham" class="sanpham-button">Tiếp tục mua sắm</a>
-            </div>
+        </div>
+        <!-- Giỏ hàng trống -->
+        <div class="gio-hang-trong">
+            <p>Chưa có sản phẩm nào trong giỏ hàng của bạn</p>
+            <a href="sanpham.html" class="buy-button">Tiếp tục mua sắm</a>
         </div>
         
-         </div>
-    </body>
+        <!-- Khách hàng khác đã mua -->
+        <div class="sanpham">
+            <h2 class = "center-heading">Khách hàng khác đã mua</h2>
+            <div class="product-list">
+                <!-- Thêm các sản phẩm vào đây -->
+                <div class="product-item">
+                    <img src="D:\Anh\Blooming Skort.webp" alt="Blooming Skort">
+                    <p>Blooming Skort</p>
+                    <button>Thêm vào giỏ</button>
+                </div>
+                <div class="product-item">
+                    <img src="D:\Anh\Buttercup Top.webp" alt="Buttercup Top">
+                    <p>Buttercup Top</p>
+                    <button>Thêm vào giỏ</button>
+                </div>
+                <div class="product-item">
+                    <img src="D:\Anh\Doris Dress.webp" alt="Doris Dress">
+                    <p>Doris Dress</p>
+                    <button>Thêm vào giỏ</button>
+                </div>
+                <div class="product-item">
+                    <img src="D:\Anh\Eleanor Top.webp" alt="Eleanor Top">
+                    <p>Eleanor Top</p>
+                    <button>Thêm vào giỏ</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sản phẩm bán chạy -->
+        <div class="sanpham">
+            <h2 class = "center-heading">Sản phẩm bán chạy</h2>
+            <div class="product-list">
+                <!-- Thêm các sản phẩm vào đây -->
+                <div class="product-item">
+                    <img src="D:\Anh\Evelyn Dress.webp" alt="Evelyn Dress">
+                    <p>Evelyn Dress</p>
+                    <button>Thêm vào giỏ</button>
+                </div>
+                <div class="product-item">
+                    <img src="D:\Anh\Gina Top.webp" alt="Gina Top">
+                    <p>Gina Top</p>
+                    <button>Thêm vào giỏ</button>
+                </div>
+                <div class="product-item">
+                    <img src="D:\Anh\Hotaru Dress.webp" alt="Hotaru Dress">
+                    <p>Hotaru Dress</p>
+                    <button>Thêm vào giỏ</button>
+                </div>
+                <div class="product-item">
+                    <img src="D:\Anh\Lilou Mini Dress.png" alt="Lilou Mini Dress">
+                    <p>Lilou Mini Dress</p>
+                    <button>Thêm vào giỏ</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sản phẩm đã xem -->
+        <div class="products">
+            <h2 class="center-heading">Sản phẩm đã xem</h2>
+            <div class="product-list">
+                <!-- Thêm các sản phẩm vào đây -->
+                <div class="product-item">
+                    <img src="D:\Anh\Maru Dress.webp" alt="Maru Dress">
+                    <p>Maru Dress</p>
+                    <button>Thêm vào giỏ</button>
+                </div>
+                <div class="product-item">
+                    <img src="D:\Anh\Miley Dress.webp" alt="Miley Dress">
+                    <p>Miley Dress</p>
+                    <button>Thêm vào giỏ</button>
+                </div>
+                <div class="product-item">
+                    <img src="D:\Anh\Penelope Top.png" alt="Penelope Top">
+                    <p>Penelope Top</p>
+                    <button>Thêm vào giỏ</button>
+                </div>
+                <div class="product-item">
+                    <img src="D:\Anh\Valeria Dress.webp" alt="Valeria Dress">
+                    <p>Valeria Dress</p>
+                    <button>Thêm vào giỏ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
